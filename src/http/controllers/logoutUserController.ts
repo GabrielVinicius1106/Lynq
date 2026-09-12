@@ -1,0 +1,32 @@
+import { getAccessToken } from "@/lib/getAccessToken.js"
+import { getRefreshToken } from "@/lib/getRefreshToken.js"
+import { DatabaseRefreshTokensRepository } from "@/repositories/database/DatabaseRefreshTokensRepository.js"
+import { LogoutUserService } from "@/services/logoutUser.js"
+import { FastifyReply, FastifyRequest } from "fastify"
+
+async function logoutUserController(req: FastifyRequest, res: FastifyReply){
+    
+    const access_token = getAccessToken(req)
+    const refresh_token = getRefreshToken(req)
+
+    if(!access_token || !refresh_token) return res.status(401).send({ message: "Unauthorized." })
+
+    try {
+
+        const refreshTokensRepository = new DatabaseRefreshTokensRepository()
+        const logoutUserService = new LogoutUserService(refreshTokensRepository)
+
+        // Remove the COOKIE for the REFRESH TOKEN
+        res.clearCookie("refresh_token")
+
+        await logoutUserService.execute({ access_token, refresh_token })
+
+    } catch(error){
+
+        throw error
+    }
+
+    return res.status(200).send({ message: "Logged Out." })
+}
+
+export { logoutUserController }

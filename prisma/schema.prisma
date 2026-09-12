@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id                       String                   @id @default(uuid())
+  email                    String                   @unique
+  name                     String?
+  password_hash            String // Hashing Password
+  refresh_tokens           RefreshToken[]
+  recovery_password_tokens RecoveryPasswordToken[]
+
+  @@map("users")
+}
+
+model RefreshToken {
+  id         String   @id @default(uuid())
+  token      String   @unique
+  created_at DateTime @default(now())
+  expires_at DateTime
+  revoked    Boolean  @default(false) // Token Revogado
+
+  // onDelete: Cascade => Exclui TODOS OS REFRESH TOKENS relacionados ao USER/
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  user_id String
+
+  @@map("refresh_tokens")
+}
+
+model RecoveryPasswordToken {
+  id         String    @id @default(uuid())
+  created_at DateTime  @default(now())
+  used_at    DateTime?
+  expires_at DateTime
+  
+  code_hash          String
+  remaining_attempts Int @default(3)
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  user_id String
+
+  @@map("recovery_password_tokens")
+}
