@@ -1,4 +1,4 @@
-# Lynq App - Notes, Tasks ans Reminders powered by AI.
+# Lynq App - Notes, Tasks and Reminders powered by AI.
 
 An app for notes, tasks and reminders powered by an LLM (Large Language Model) for NLP (Natural Language Processing).
 
@@ -9,19 +9,19 @@ And of course, creating a REAL APPLICATION for REAL USERS (me included).
 ## Concepts, Technologies & Good Practices Learned
 
 - Layered Architecture
-    Services
-    Controllers
-    Repositories (Database and InMemory)
-    Providers
+   - Services
+   - Controllers
+   - Repositories (Database and InMemory)
+   - Providers
 
 - SOLID Patterns
-    Single Responsibility Principle
-    Interface Segregation Principle
-    Dependency Inversion Principle  
+   - Single Responsibility Principle
+   - Interface Segregation Principle
+   - Dependency Inversion Principle  
 
 
 - Prisma ORM
-    Migrations
+   - Migrations
 
 - Validations with Zod and Typescript
 
@@ -31,8 +31,8 @@ And of course, creating a REAL APPLICATION for REAL USERS (me included).
 - HTPP Cookies
 
 - Docker
-    Creating Conteiners
-    Manage Conteiners
+   - Creating Conteiners
+   - Manage Conteiners
 
 
 - Redis
