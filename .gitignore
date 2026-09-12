@@ -1,0 +1,15 @@
+node_modules/
+coverage/
+.claude/
+
+/diagrams
+
+.env
+docker-compose.yml
+
+ISSUES.md
+VULNERABILITIES.md
+
+/src/generated/prisma
+
+todo.md
