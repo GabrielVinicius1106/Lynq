@@ -1,11 +1,31 @@
 // A Redis Simplified Implementation
 
-import { RedisInterface, RedisObject, RedisTypes } from "@/tools/interfaces/RedisInterface.js"
+
+// Redis Types
+type RedisTypes = string | number | object | boolean
 
 type miliseconds = number
 
-// Simplified Version of REDIS
+interface RedisInterface {   
+    
+    SET(key: RedisTypes, value: RedisTypes, expires_in: miliseconds): void
+    
+    GET(key: RedisTypes): RedisObject | null
+    
+    DEL(key: RedisTypes): void
 
+    EXISTS(key: RedisTypes): boolean
+    
+    TTL(key: RedisTypes): miliseconds | null
+}
+
+export interface RedisObject {
+    value: RedisTypes
+    expires_at: Date
+    created_at: Date
+}
+
+// Simplified Version of REDIS
 class Redis implements RedisInterface {
 
     private map: Map<RedisTypes, RedisObject>
@@ -70,6 +90,7 @@ class Redis implements RedisInterface {
     }
 }  
 
+// Testing Methods
 async function main(){
 
     const redis = new Redis()
