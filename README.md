@@ -59,6 +59,48 @@ And of course, creating a REAL APPLICATION for REAL USERS (me included).
 
 - Vitest (tests)
 
+## Project Structure
+
+Lynq/
+
+├── prisma/
+│   ├─ migrations/             # Database Migrations Functions
+│   └── schema.prisma          # Database Schemas
+│
+├── src/
+│   ├── app.ts                  # Configuração do app Express
+│   ├── server.ts               # Ponto de entrada do servidor
+│   │                           
+│   ├── env/                    # Environment Variables Configuration
+│   ├── generated/              # Prisma Generated Client
+│   ├── http/                   # Controllers and Routes
+│   ├── interfaces/             # Application Interfaces and Entities
+│   ├── lib/                    # Utility Functions
+│   ├── providers/              # Providers
+│   ├── repositories/           # Database and InMemory Repositories
+│   ├── schemas/                # Application Zod Schemas
+│   ├── services/               # Application Services
+│   └── tools/                  # Self Implemented Tools and Models
+│ 
+├── test/                       # Application Test Files
+│
+├── .env                        
+├── .env.example                
+├── .gitignore                  
+├── docker-compose.yml          
+├── package.json                
+├── package-lock.json            
+├── prisma.config.ts             
+├── tsconfig.json                
+│
+├── generateKeys.ts             # Function to Generate Secrets
+│
+├── CONTEXT.md                  # Context File to AI Agents
+├── GIT.md                      # Git Knowledge Acquired
+├── NOTES.md                    # Tools and Technologies Knowledge Acquired
+├── VULNERABILITIES.md          # Application Vulnerabilities until Now
+└── README.md                   # Readme File
+
 ## How to run?
 
 Clone the repository
