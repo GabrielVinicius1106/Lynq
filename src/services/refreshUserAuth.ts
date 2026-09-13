@@ -6,7 +6,7 @@ import { TokenExpiredError } from "./errors/TokenExpired.js";
 import { TokenRevokedError } from "./errors/TokenRevoked.js";
 
 import { env } from "@/env/index.js";
-import { generateTokens } from "@/lib/generateTokens.js";
+import { generateAccessTokens } from "@/lib/generateTokens.js";
 
 export class RefreshUserAuthService {
 
@@ -43,7 +43,7 @@ export class RefreshUserAuthService {
 
         const payload = user_id
 
-        const { access_token, refresh_token, expires_at } = generateTokens(payload, env.JWT_SECRET)
+        const { access_token, refresh_token, expires_at } = generateAccessTokens(payload, env.JWT_SECRET)
 
         // Criar Refresh Token
         await this.refreshTokensRepository.create({
