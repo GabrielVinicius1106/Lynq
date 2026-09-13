@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { createUserBodySchema } from "@/schemas/createUserBodySchema.js";
 import { DatabaseUsersRepository } from "@/repositories/database/DatabaseUsersRepository.js";
 import { CreateUserService } from "@/services/createUser.js";
-import { UserAlreadyExistsError } from "@/services/errors/NotPossibleToCreateUserAccount.js";
+import { NotPossibleToCreateUserAccountError } from "@/services/errors/NotPossibleToCreateUserAccount.js";
 import { InvalidPasswordLengthError } from "@/services/errors/InvalidPasswordLength.js";
 
 async function createUserController(req: FastifyRequest, res: FastifyReply){
@@ -18,7 +18,7 @@ async function createUserController(req: FastifyRequest, res: FastifyReply){
 
     } catch(error){
 
-        if(error instanceof UserAlreadyExistsError){
+        if(error instanceof NotPossibleToCreateUserAccountError){
             return res.status(409).send({
                 message: error.message
             })
