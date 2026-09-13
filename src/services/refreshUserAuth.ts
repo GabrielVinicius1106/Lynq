@@ -1,9 +1,9 @@
 import { RefreshTokenInput } from "@/interfaces/entities/RefreshToken.js";
 
 import { RefreshTokensRepositoryInterface } from "@/repositories/RefreshTokensRepositoryInterface.js";
-import { UnauthorizedError } from "./errors/UnauthorizedError.js";
-import { TokenExpiredError } from "./errors/TokenExpiredError.js";
-import { TokenRevokedError } from "./errors/TokenRevokedError.js";
+import { UnauthorizedError } from "./errors/Unauthorized.js";
+import { TokenExpiredError } from "./errors/TokenExpired.js";
+import { TokenRevokedError } from "./errors/TokenRevoked.js";
 
 import { env } from "@/env/index.js";
 import { generateTokens } from "@/lib/generateTokens.js";

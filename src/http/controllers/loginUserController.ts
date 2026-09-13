@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { DatabaseUsersRepository } from "@/repositories/database/DatabaseUsersRepository.js";
 import { loginUserBodySchema } from "@/schemas/loginUserBodyShema.js";
 import { LoginUserService } from "@/services/loginUser.js";
-import { InvalidCredentialsError } from "@/services/errors/InvalidCredentialsError.js";
+import { InvalidCredentialsError } from "@/services/errors/InvalidCredentials.js";
 import { DatabaseRefreshTokensRepository } from "@/repositories/database/DatabaseRefreshTokensRepository.js";
 
 async function loginUserController(req: FastifyRequest, res: FastifyReply){

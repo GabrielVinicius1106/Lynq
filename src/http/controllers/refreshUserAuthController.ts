@@ -1,9 +1,9 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { DatabaseRefreshTokensRepository } from "@/repositories/database/DatabaseRefreshTokensRepository.js";
 import { RefreshUserAuthService } from "@/services/refreshUserAuth.js";
-import { UnauthorizedError } from "@/services/errors/UnauthorizedError.js";
-import { TokenExpiredError } from "@/services/errors/TokenExpiredError.js";
-import { TokenRevokedError } from "@/services/errors/TokenRevokedError.js";
+import { UnauthorizedError } from "@/services/errors/Unauthorized.js";
+import { TokenExpiredError } from "@/services/errors/TokenExpired.js";
+import { TokenRevokedError } from "@/services/errors/TokenRevoked.js";
 import { getRefreshToken } from "@/lib/getRefreshToken.js";
 import { getAccessToken } from "@/lib/getAccessToken.js";
 

@@ -36,21 +36,23 @@ export class MemoryRecoveryPasswordTokensRepository implements RecoveryPasswordT
         return user
     }
     
-    async reduceNumberAttempts(token_id: string): Promise<number | null> {
+    async reduceNumberAttempts(token_id: string): Promise<number> {
  
         const idx = this.recoveryPasswordTokens.findIndex((recovery_password_token) => recovery_password_token.id === token_id)
 
-        if(idx == -1) return null
+        if(idx == -1) return 0
 
-        const recoveryToken = this.recoveryPasswordTokens[idx]
-
-        if(!recoveryToken) return null
+        if(!this.recoveryPasswordTokens[idx]) return 0
         
-        this.recoveryPasswordTokens[idx]!.remaining_attempts--
+        const { remaining_attempts } = this.recoveryPasswordTokens[idx]
 
-        const remaining_attempts = this.recoveryPasswordTokens[idx]!.remaining_attempts
+        if(remaining_attempts <= 0) return 0
 
-        return remaining_attempts
+        this.recoveryPasswordTokens[idx].remaining_attempts--
+
+        const remainingAttemps = this.recoveryPasswordTokens[idx]!.remaining_attempts
+
+        return remainingAttemps
     }
 
     async revoke(token_id: string): Promise<RecoveryPasswordToken | null> {

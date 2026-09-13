@@ -1,7 +1,7 @@
 import { hash } from "bcryptjs"
 import { UsersRepositoryInterface } from "@/repositories/UsersRepositoryInterface.js"
-import { UserAlreadyExistsError } from "./errors/UserAlreadyExistsError.js"
-import { InvalidPasswordLengthError } from "./errors/InvalidPasswordLengthError.js"
+import { NotPossibleToCreateUserAccountError } from "./errors/NotPossibleToCreateUserAccount.js"
+import { InvalidPasswordLengthError } from "./errors/InvalidPasswordLength.js"
 
 export interface CreateUserRequest {
     name: string
@@ -22,7 +22,7 @@ export class CreateUserService {
     
         const userWithSameEmail = await this.usersRepository.findByEmail(email)
     
-        if(userWithSameEmail) throw new UserAlreadyExistsError()
+        if(userWithSameEmail) throw new NotPossibleToCreateUserAccountError()
     
         const user = await this.usersRepository.create({
             name,

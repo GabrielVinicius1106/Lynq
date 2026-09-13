@@ -1,9 +1,9 @@
-import { GenerateTokensOutput } from "@/interfaces/GenerateTokens.js"
+import { GenerateAccessTokensOutput } from "@/interfaces/GenerateAccessTokens.js"
 import { randomBytes, randomUUID } from "node:crypto"
 
 import jwt from "jsonwebtoken"
 
-function generateTokens(user_id: string, secret: string): GenerateTokensOutput {
+function generateAccessTokens(user_id: string, secret: string): GenerateAccessTokensOutput {
 
     const payload = {
         sub: user_id,
@@ -26,4 +26,4 @@ function generateTokens(user_id: string, secret: string): GenerateTokensOutput {
 
 }
 
-export { generateTokens }
+export { generateAccessTokens }

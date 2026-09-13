@@ -2,7 +2,7 @@ import { LoginUserInput } from "@/interfaces/LoginUser.js"
 import { MemoryRefreshTokensRepository } from "@/repositories/memory/MemoryRefreshTokensRepository.js"
 import { MemoryUsersRepository } from "@/repositories/memory/MemoryUsersRepository.js"
 import { CreateUserRequest, CreateUserService } from "@/services/createUser.js"
-import { InvalidCredentialsError } from "@/services/errors/InvalidCredentialsError.js"
+import { InvalidCredentialsError } from "@/services/errors/InvalidCredentials.js"
 import { LoginUserService } from "@/services/loginUser.js"
 import { test, describe, expect } from "vitest"
 

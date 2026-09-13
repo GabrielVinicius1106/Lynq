@@ -1,7 +1,13 @@
 import { RecoveryPasswordTokensInterface } from "@/repositories/RecoveryPasswordTokensInterface.js";
 import { UsersRepositoryInterface } from "@/repositories/UsersRepositoryInterface.js";
 import { compare, hash } from "bcryptjs";
-import { InvalidTokenError } from "./errors/InvalidTokenError.js";
+import { NoAttemptsLeftError } from "./errors/NoAttemptsLeft.js";
+import { InvalidOTPCodeError } from "./errors/InvalidOTPCode.js";
+import { TokenNotFoundError } from "./errors/TokenNotFound.js";
+import { TokenExpiredError } from "./errors/TokenExpired.js";
+import { TokenAlreadyUsedError } from "./errors/TokenAlreadyUsed.js";
+import { env } from "@/env/index.js";
+import { generateResetToken } from "@/lib/generateResetToken.js";
 
 interface ValidateRecoveryAttemptRequest {
     code_otp: string
@@ -16,23 +22,40 @@ export class ValidateRecoveryPasswordAttemptService {
 
         const recovery_password_token = await this.recoveryPasswordTokens.findById(token_identifier)
 
-        if(!recovery_password_token) return { message: "Token not Found." }
+        if(!recovery_password_token) throw new TokenNotFoundError()
+        
+        const { id, user_id, code_hash, remaining_attempts, expires_at, used_at } = recovery_password_token
 
-        const equals = compare(code_otp, recovery_password_token.code_hash)
+        if(expires_at < new Date()) throw new TokenExpiredError()
 
-        // Caso o OTP não seja IGUAL. Devemos reduzir o NÚMERO DE TENTATIVAS RESTANTES.        
+        if(used_at) throw new TokenAlreadyUsedError()
+
+        if(remaining_attempts <= 0) throw new NoAttemptsLeftError()
+
+        const equals = compare(code_otp, code_hash)
+
+        // In case that OTP is NOT EQUALS. We should reduce the NUMBER OF ATTEMPS LEFT. Return Invalid OTP and Remaining Attempts.       
         if(!equals){
 
-            await this.recoveryPasswordTokens.reduceNumberAttempts(token_identifier)
+            const remainingAttempts = await this.recoveryPasswordTokens.reduceNumberAttempts(token_identifier)
 
-            const recovery_password_token = await this.recoveryPasswordTokens.findById(token_identifier)
+            if(!remainingAttempts) throw new NoAttemptsLeftError()
 
-            throw new InvalidTokenError()
+            return {
+                message: "Invalid OTP Code.",
+                attempts_remaining: remainingAttempts
+            }
         }
 
+        // In case it's VALID. Return SUCESS! Redirect to CREATE NEW PASSWORD.
+        
+        // Used At Now - Revoked
+        await this.recoveryPasswordTokens.revoke(id)
 
-        // Caso seja VÁLIDO. Retornamos SUCESSO! E redirecionamos para CRIAR UMA NOVA SENHA.
+        // Create new RESET PASSWORD TOKEN
+        const reset_token = generateResetToken(user_id, env.JWT_SECRET)
 
+        return { reset_token }
 
     }
 

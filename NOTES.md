@@ -280,13 +280,30 @@ if(await redis.get(access_token)) return res.status(401).send({ message: "Unauth
 
 - Nessa parte, o SERVIDOR BUSCA por este TOKEN no BANCO DE DADOS para VALIDAR
 
-- Valida HASH do CÓDIGO e TTL do TOKEN 
+- Valida HASH do CÓDIGO e TTL do TOKEN
 
-- Com o *OTP* VALIDADO redirecionar para RECUPERAÇÃO DE SENHA.
+- Caso o OTP seja INVÁLIDO. Reduz o Número de Tentativas e Retorna InvalidOTPCodeError with Remaining Attempts.
 
-- Inserir a *NOVA SENHA* e ENVIAR PARA O SERVIDOR com o *TOKEN IDENTIFICADOR*
+- Caso o NÚMERO DE TENTATIVAS seja ZERO. Basta retornar NoMoreAttemptLeftError e pedir para realizar Nova Tentativa de Recuperação.
 
-- Busca novamente pelo TOKEN, e realiza a ATUALIZAÇÃO DA SENHA.
+- Não devemos REVOGAR TODOS OS DISPOSITIVOS do USUÁRIO ATUAIS (revokeAll)
+
+- Isso seria um Ataque de *DoS*. Qualquer um pode pedir para recuperar a senha e revogar de propósito, encerrando as sessões dos dispositivos do usuário atuais. 
+
+### Dos and DDoS Attacks
+
+- [ ] Notes about DoS and DDoS
+
+###
+
+- Com o *OTP* VALIDADO:
+
+    > Consumir OTP. Setar USED_AT.
+    > Criar um TOKEN DE RESET DE SENHA (JWT). Será consumido pelo SERVIÇO de PASSWORD RESET.
+
+- Inserir a *NOVA SENHA* e ENVIAR PARA O SERVIDOR com o *TOKEN DE RESET (JWT)*
+
+- Valida o TOKEN DE RESET MATEMATICAMENTE (JWT).
 
 ### Pontos Críticos
 

@@ -8,7 +8,7 @@ import { LogoutUserFromAllDevicesService } from "@/services/logoutUserFromAllDev
 import { redisClone } from "@/tools/redisClone.js"
 import { LoginUserInput } from "@/interfaces/LoginUser.js"
 import { LogoutUserInput } from "@/interfaces/LogoutUser.js"
-import { InvalidTokenError } from "@/services/errors/InvalidTokenError.js"
+import { InvalidTokenError } from "@/services/errors/InvalidToken.js"
 
 
 describe("Logout User From All Devices Service Tests", () => {

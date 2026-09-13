@@ -6,7 +6,7 @@ export interface RecoveryPasswordTokensInterface {
 
     findById(token_id: string): Promise<RecoveryPasswordToken | null>
 
-    reduceNumberAttempts(token_id: string): Promise<number | null>
+    reduceNumberAttempts(token_id: string): Promise<number>
 
     revoke(token_id: string): Promise<RecoveryPasswordToken | null>
 

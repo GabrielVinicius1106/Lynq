@@ -1,9 +1,9 @@
 import { compare } from "bcryptjs"
 import { UsersRepositoryInterface } from "@/repositories/UsersRepositoryInterface.js"
-import { InvalidCredentialsError } from "./errors/InvalidCredentialsError.js"
+import { InvalidCredentialsError } from "./errors/InvalidCredentials.js"
 import { env } from "@/env/index.js"
 import { RefreshTokensRepositoryInterface } from "@/repositories/RefreshTokensRepositoryInterface.js"
-import { generateTokens } from "@/lib/generateTokens.js"
+import { generateAccessTokens } from "@/lib/generateTokens.js"
 
 interface LoginUserRequest {
     email: string
@@ -28,7 +28,7 @@ export class LoginUserService {
         // Senha INVÁLIDA
         if(!validPassword) throw new InvalidCredentialsError()
         
-        const { access_token, refresh_token, expires_at } = generateTokens(user_id, env.JWT_SECRET) 
+        const { access_token, refresh_token, expires_at } = generateAccessTokens(user_id, env.JWT_SECRET) 
 
         // Criar Refresh Token
         await this.refreshTokensRepository.create({
