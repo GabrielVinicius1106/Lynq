@@ -63,6 +63,7 @@ And of course, creating a REAL APPLICATION for REAL USERS (me included).
 
 Lynq/
 
+```
 ├── prisma/
 │   ├─ migrations/             # Database Migrations Functions
 │   └── schema.prisma          # Database Schemas
@@ -100,6 +101,7 @@ Lynq/
 ├── NOTES.md                    # Tools and Technologies Knowledge Acquired
 ├── VULNERABILITIES.md          # Application Vulnerabilities until Now
 └── README.md                   # Readme File
+```
 
 ## How to run?
 
