@@ -1,7 +1,7 @@
 import { MemoryUsersRepository } from "@/repositories/memory/MemoryUsersRepository.js"
 import { CreateUserRequest, CreateUserService } from "@/services/createUser.js"
-import { InvalidPasswordLengthError } from "@/services/errors/InvalidPasswordLengthError.js"
-import { UserAlreadyExistsError } from "@/services/errors/UserAlreadyExistsError.js"
+import { InvalidPasswordLengthError } from "@/services/errors/InvalidPasswordLength.js"
+import { UserAlreadyExistsError } from "@/services/errors/NotPossibleToCreateUserAccount.js"
 import { test, describe, expect } from "vitest"
 
 import { compare } from "bcryptjs"

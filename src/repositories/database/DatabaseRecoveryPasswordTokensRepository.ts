@@ -4,11 +4,14 @@ import { prisma } from "@/lib/prisma.js";
 
 export class DatabaseRecoveryPasswordTokensRepository implements RecoveryPasswordTokensInterface {
     
-    async reduceNumberAttempts(token_id: string): Promise<number | null> {
+    async reduceNumberAttempts(token_id: string): Promise<number> {
 
         const { remaining_attempts } = await prisma.recoveryPasswordToken.update({
             where: {
-                id: token_id
+                id: token_id,
+                AND: {
+                    remaining_attempts: { gt: 0 }
+                }
             },
             data: {
                 remaining_attempts: { decrement: 1 } 

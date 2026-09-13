@@ -2,8 +2,8 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { createUserBodySchema } from "@/schemas/createUserBodySchema.js";
 import { DatabaseUsersRepository } from "@/repositories/database/DatabaseUsersRepository.js";
 import { CreateUserService } from "@/services/createUser.js";
-import { UserAlreadyExistsError } from "@/services/errors/UserAlreadyExistsError.js";
-import { InvalidPasswordLengthError } from "@/services/errors/InvalidPasswordLengthError.js";
+import { UserAlreadyExistsError } from "@/services/errors/NotPossibleToCreateUserAccount.js";
+import { InvalidPasswordLengthError } from "@/services/errors/InvalidPasswordLength.js";
 
 async function createUserController(req: FastifyRequest, res: FastifyReply){
     

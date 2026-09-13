@@ -2,7 +2,7 @@ import { LogoutUserInput } from "@/interfaces/LogoutUser.js";
 import { redis } from "@/lib/redis.js";
 import { RefreshTokensRepositoryInterface } from "@/repositories/RefreshTokensRepositoryInterface.js";
 import { redisClone } from "@/tools/redisClone.js";
-import { InvalidTokenError } from "./errors/InvalidTokenError.js";
+import { InvalidTokenError } from "./errors/InvalidToken.js";
 
 
 export class LogoutUserFromAllDevicesService {
