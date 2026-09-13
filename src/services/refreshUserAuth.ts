@@ -1,4 +1,4 @@
-import { RefreshTokenInput } from "@/interfaces/RefreshToken.js";
+import { RefreshTokenInput } from "@/interfaces/entities/RefreshToken.js";
 
 import { RefreshTokensRepositoryInterface } from "@/repositories/RefreshTokensRepositoryInterface.js";
 import { UnauthorizedError } from "./errors/UnauthorizedError.js";

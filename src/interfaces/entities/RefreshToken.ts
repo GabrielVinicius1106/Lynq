@@ -9,3 +9,7 @@ export interface RefreshToken {
     revoked : boolean
     
 }
+
+export interface RefreshTokenInput {
+    token: string
+}

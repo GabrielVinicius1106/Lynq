@@ -1,5 +1,5 @@
 import { LoginUserInput } from "@/interfaces/LoginUser.js"
-import { RefreshTokenInput } from "@/interfaces/RefreshToken.js"
+import { RefreshTokenInput } from "@/interfaces/entities/RefreshToken.js"
 import { MemoryRefreshTokensRepository } from "@/repositories/memory/MemoryRefreshTokensRepository.js"
 import { MemoryUsersRepository } from "@/repositories/memory/MemoryUsersRepository.js"
 import { CreateUserRequest, CreateUserService } from "@/services/createUser.js"
