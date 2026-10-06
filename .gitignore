@@ -1,0 +1,14 @@
+node_modules/
+coverage/
+.claude/
+
+/diagrams
+
+.env
+
+ISSUES.md
+VULNERABILITIES.md
+
+/src/generated/prisma
+
+todo.md

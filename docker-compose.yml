@@ -1,0 +1,16 @@
+services: # Serviços Necessários
+  postgres: # Configura uma Imagem do POSTGRESQL
+    image: postgres:15-alpine
+    container_name: lynq-postgres
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB}
+    ports:
+      - "${DB_PORT}:5432"
+
+  redis: # Configura a Imagem do REDIS
+    image: redis:7-alpine
+    container_name: lynq-redis
+    ports:
+      - "6379:6379"
